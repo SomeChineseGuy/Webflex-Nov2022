@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+[Lecture Recording](https://us02web.zoom.us/rec/share/Tii_jSBqQ2-9KD1MAEb2zswQw0y7PX0o24Ae9I_miuUZWIU-Wby9ilKVB2Aq3OUv.8tKnSx9sRj_l75Mm)  
+[Code Repo](https://github.com/SomeChineseGuy/Webflex-Nov2022)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# M08W20 - Unit & Integration Testing
 
-## Available Scripts
+### To Do
 
-In the project directory, you can run:
+- [x] Tools for testing React
+- [x] Coverage Reports
+- [x] Add Features/Tests to our App
+- [x] `debug()` and `prettyDOM()`
+- [x] Mocking AJAX Requests and Functions
 
-### `npm start`
+### Setup & Teardown
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Tests should represent how a user (or other code) would interact with our application
+- It's important to properly setup the test conditions to isolate the piece of functionality under test
+- Once the test has been executed, tear down all setup to leave no traces for the next test
+- It's important to scope variables appropriately to make sure that there won't be leaks or interference with other tests
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Tools for testing React
 
-### `npm test`
+- [Jest](https://jestjs.io/)
+  - Jest is the framework we use to run our tests
+  - Comes with `create-react-app`, so no need to configure
+  - `npm run test` will start Jest in watch mode and run the tests
+- [DOM Testing Library](https://testing-library.com/docs/dom-testing-library/intro)
+  - A set of tools to help target DOM elements and trigger DOM events
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+  - Built on top of the DOM Testing Library, gives us more possibilities to target and render React elements to make them possible to test
+- [JestDOM](https://github.com/testing-library/jest-dom)
+  - JestDOM is a set of matchers (like `.toHaveClass()` or `.toBeVisible()`) to help target elements in the DOM
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Passing Flags to Scripts
 
-### `npm run build`
+- We can define our own scripts in `package.json`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```json
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "list": "ls"
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- We can run these scripts with `npm run script-name` or `yarn script-name`
+- We can also pass [flags](https://gobyexample.com/command-line-flags) to our scripts
+- Using `npm`, we have to add `--` before passing flags
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run script-name -- --flag-name
 
-### `npm run eject`
+yarn script-name --flag-name
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Eg. to pass "-la" to our `list` script, we'd use `npm run list -- -la` or `yarn list -la` (try it yourself!)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Coverage Reports
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- A coverage report shows us how much of our code is covered by the tests we've written
+- The code coverage of our tests is important, but it's more important to have solid tests with a little less coverage than easy tests with a lot of coverage
+- It's okay to not have 100% coverage, it's almost impossible!
+- `npm run test -- --coverage` will start Jest in watch mode and show the coverage status after each test
+- If you notice that your coverage report is empty, add the `watchAll=false` flag
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run test -- --coverage --watchAll=false
+```
 
-## Learn More
+### Add Features/Tests to App
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- TDD: unit test
+  - choose a valid response for the computer player (currently hard-coded)
+- TDD: integration test
+  - clicking on the robot head will toggle the cheating boolean
+- mocking
+  - test fetching high scores (mock Axios)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `getBy` & `queryBy`
 
-### Code Splitting
+- One small thing about `getBy` and `queryBy` to be aware of is that `getBy` will throw an error if the element is not found
+- `queryBy` will return only null, so it's up to the context to guide you which you should use
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Skipping Tests
 
-### Analyzing the Bundle Size
+- For various reasons, you might want to skip a particular test
+- To skip a test, use either `xit` or `test.skip`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```js
+// using test
+test('this test will run', () => {});
+test.skip('this test will be skipped', () => {});
 
-### Making a Progressive Web App
+// using it
+it('this test will run', () => {});
+xit('this test will be skipped', () => {});
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Notes and example app based on [Francis' lecture](https://github.com/FrancisBourgouin/lhl-12-w8d1)
 
-### Advanced Configuration
+### Useful Links
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [DOM Testing Library](https://testing-library.com/docs/dom-testing-library/intro)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- [Which query should I use?](https://testing-library.com/docs/guide-which-query)
+- [Jest-DOM](https://github.com/testing-library/jest-dom)
+- [Testing Library Async Functions](https://testing-library.com/docs/dom-testing-library/api-async)
+- [Jest --coverage issue](https://github.com/facebook/jest/issues/9723)
