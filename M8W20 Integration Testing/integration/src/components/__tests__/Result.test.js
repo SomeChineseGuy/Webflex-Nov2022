@@ -1,0 +1,16 @@
+import React from 'react';
+import { render, getByTestId, fireEvent, getByText } from '@testing-library/react';
+import Result from '../Result';
+import '@testing-library/jest-dom/extend-expect';
+
+test('shows appropriate message when the status is "Waiting"', () => {
+  const fakeState = {
+    compSelection: null,
+    playerSelection: null,
+    status: 'Waiting',
+    cheating: false
+  };
+  
+  const { container } = render(<Result status={fakeState.status} />);
+  expect(getByTestId(container, 'result_footer')).toHaveTextContent('Waiting for your choice!');
+});

@@ -1,0 +1,114 @@
+html, body {
+  margin: 0;
+}
+body {
+  font-family: Helvetica;
+  font-size: 16px;
+}
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header, footer {
+  text-align: center;
+  background: #c8c8c8;
+  padding: 1em;
+}
+header h1, footer h1 {
+  margin: 0;
+}
+header h2, footer h2 {
+  font-size: 4em;
+  margin: 0;
+}
+main.game {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10vh;
+}
+section.player, section.computer {
+  text-align: center;
+}
+section.player > span, section.computer > span {
+  font-size: 30vh;
+}
+section.player .choices, section.computer .choices {
+  display: flex;
+  justify-content: space-evenly;
+}
+section.player .choices button, section.computer .choices button {
+  font-size: 3em;
+  border: 0.1em solid black;
+  border-radius: 0.1em;
+  background: white;
+  padding: 0.1em;
+  width: 30%;
+}
+section.player .choices button:hover, section.computer .choices button:hover {
+  background: black;
+}
+section.computer > span {
+  opacity: 0.7;
+}
+section.computer > span.cheating {
+  opacity: 1;
+}
+html, body {
+  margin: 0;
+}
+body {
+  font-family: Helvetica;
+  font-size: 16px;
+}
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header, footer {
+  text-align: center;
+  background: #c8c8c8;
+  padding: 1em;
+}
+header h1, footer h1 {
+  margin: 0;
+}
+header h2, footer h2 {
+  font-size: 4em;
+  margin: 0;
+}
+main.game {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10vh;
+}
+section.player, section.computer {
+  text-align: center;
+}
+section.player > span, section.computer > span {
+  font-size: 30vh;
+}
+section.player .choices, section.computer .choices {
+  display: flex;
+  justify-content: space-evenly;
+}
+section.player .choices button, section.computer .choices button {
+  font-size: 3em;
+  border: 0.1em solid black;
+  border-radius: 0.1em;
+  background: white;
+  padding: 0.1em;
+  width: 30%;
+}
+section.player .choices button:hover, section.computer .choices button:hover {
+  background: black;
+}
+section.computer > span {
+  opacity: 0.7;
+}
+section.computer > span.cheating {
+  opacity: 1;
+}
